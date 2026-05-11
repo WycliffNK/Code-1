@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0B1F3A;
+  --color-navy-deep: #070F1C;
+  --color-gold: #C9A84C;
+  --color-warm-white: #FAFAF8;
+  --color-charcoal: #0C0C0C;
+  --color-charcoal-soft: #3A3A3A;
+  --color-charcoal-muted: #6A6A6A;
+  --font-serif: var(--font-dm-serif-display);
+  --font-sans: var(--font-dm-sans);
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+body {
+  background: #FAFAF8;
+  color: #0C0C0C;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* Form step animation */
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.form-step.active {
+  animation: stepIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}

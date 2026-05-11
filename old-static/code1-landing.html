@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code 1 — Because your potential is always the highest priority.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0F1B2D;
+    --navy-deep: #0a121f;
+    --gold: #C9A961;
+    --gold-dark: #8B6F2E;
+    --cream: #F5F1E8;
+    --cream-warm: #FAF8F2;
+    --charcoal: #2A2A2A;
+    --charcoal-soft: #4A4A4A;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Reveal animation — elements start hidden, fade up on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  /* Gold rule (replaces eyebrow labels) */
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 0 32px;
+  }
+  .rule-center { margin: 0 auto 32px; }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: transparent;
+    transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(15, 27, 45, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 16px 56px;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--cream);
+  }
+  .nav-cta {
+    font-size: 12px;
+    color: var(--gold);
+    border: 0.5px solid var(--gold);
+    padding: 10px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: var(--cream);
+    min-height: 100vh;
+    padding: 180px 56px 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-text { max-width: 580px; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+    color: var(--cream);
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-style: italic;
+    color: rgba(245, 241, 232, 0.75);
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 460px;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 16px 32px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--sans);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 169, 97, 0.25);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 32px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0.5px solid rgba(245, 241, 232, 0.5);
+    display: inline-block;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-photo {
+    aspect-ratio: 4 / 5;
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px dashed rgba(201, 169, 97, 0.3);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 241, 232, 0.4);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.8;
+  }
+
+  /* Section base */
+  section { padding: 140px 56px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .container-narrow { max-width: 720px; margin: 0 auto; }
+
+  /* Problem section */
+  .problem {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+  .problem h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: var(--navy);
+    margin-bottom: 28px;
+    max-width: 720px;
+  }
+  .problem p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--charcoal-soft);
+    max-width: 600px;
+  }
+
+  /* Credibility bar */
+  .credibility {
+    background: var(--navy);
+    padding: 80px 56px;
+  }
+  .credibility-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 52px);
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: rgba(245, 241, 232, 0.7);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* Code 1 system */
+  .system {
+    background: var(--cream-warm);
+    color: var(--charcoal);
+  }
+  .system-header { text-align: center; margin-bottom: 80px; }
+  .system-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+  .system-header p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--charcoal-soft);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 800px;
+    margin: 0 auto 96px;
+  }
+  .pillar { text-align: center; }
+  .pillar-mark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    transition: transform 0.4s ease;
+  }
+  .pillar:hover .pillar-mark { transform: scale(1.05); }
+  .pillar h3 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .pillar-list {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--charcoal-soft);
+    line-height: 2.2;
+    font-style: italic;
+  }
+  .pull-quote {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 0;
+    border-top: 0.5px solid rgba(15, 27, 45, 0.15);
+    border-bottom: 0.5px solid rgba(15, 27, 45, 0.15);
+    text-align: center;
+  }
+  .pull-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.5vw, 28px);
+    line-height: 1.4;
+    color: var(--navy);
+    font-weight: 400;
+  }
+
+  /* Audience pathways */
+  .pathways {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+  .pathways-header { text-align: center; margin-bottom: 72px; }
+  .pathways-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: var(--navy);
+  }
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .pathway-card {
+    background: #ffffff;
+    border: 0.5px solid rgba(15, 27, 45, 0.12);
+    padding: 36px 32px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .pathway-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 32px rgba(15, 27, 45, 0.06);
+  }
+  .pathway-card h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .pathway-card p {
+    font-size: 13px;
+    color: var(--charcoal-soft);
+    line-height: 1.6;
+  }
+
+  /* About */
+  .about {
+    background: var(--cream-warm);
+    color: var(--charcoal);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .about-photo {
+    aspect-ratio: 4 / 5;
+    background: rgba(15, 27, 45, 0.04);
+    border: 0.5px dashed rgba(15, 27, 45, 0.2);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-dark);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.8;
+  }
+  .about-text h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    color: var(--navy);
+    margin-bottom: 28px;
+  }
+  .about-text p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--charcoal-soft);
+    margin-bottom: 16px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  /* Assessment / form */
+  .assessment {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 140px 56px;
+  }
+  .assessment-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 72px;
+  }
+  .assessment-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    margin-bottom: 24px;
+  }
+  .assessment-header p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(245, 241, 232, 0.75);
+  }
+  .form-card {
+    background: rgba(245, 241, 232, 0.03);
+    border: 0.5px solid rgba(201, 169, 97, 0.3);
+    border-radius: 4px;
+    padding: 56px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .form-step {
+    display: none;
+    animation: stepIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .form-step.active { display: block; }
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .step-counter {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .step-question {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .audience-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .audience-option {
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px solid rgba(245, 241, 232, 0.2);
+    padding: 16px 20px;
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--cream);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--sans);
+    text-align: left;
+  }
+  .audience-option:hover {
+    border-color: var(--gold);
+    background: rgba(201, 169, 97, 0.08);
+  }
+  .audience-option.selected {
+    border-color: var(--gold);
+    background: rgba(201, 169, 97, 0.15);
+    color: var(--gold);
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px solid rgba(245, 241, 232, 0.2);
+    border-radius: 2px;
+    padding: 16px 20px;
+    color: var(--cream);
+    font-size: 14px;
+    font-family: var(--sans);
+    margin-bottom: 32px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201, 169, 97, 0.06);
+  }
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(245, 241, 232, 0.35);
+  }
+  .commitment-scale {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+  .scale-num {
+    background: rgba(245, 241, 232, 0.04);
+    border: 0.5px solid rgba(245, 241, 232, 0.2);
+    padding: 14px 0;
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--cream);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-family: var(--sans);
+  }
+  .scale-num:hover {
+    border-color: var(--gold);
+  }
+  .scale-num.selected {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .progress-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+  }
+  .progress-segment {
+    flex: 1;
+    height: 3px;
+    background: rgba(245, 241, 232, 0.15);
+    border-radius: 2px;
+    transition: background 0.5s ease;
+  }
+  .progress-segment.complete { background: var(--gold); }
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .btn-back {
+    background: transparent;
+    color: rgba(245, 241, 232, 0.6);
+    border: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    padding: 10px 0;
+    transition: color 0.3s ease;
+  }
+  .btn-back:hover { color: var(--cream); }
+  .btn-next {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 14px 36px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    margin-left: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(201, 169, 97, 0.25);
+  }
+  .form-success {
+    text-align: center;
+    padding: 40px 0;
+  }
+  .form-success h3 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .form-success p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: rgba(245, 241, 232, 0.8);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .privacy-note {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(245, 241, 232, 0.5);
+    margin-top: 28px;
+    letter-spacing: 1px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--navy-deep);
+    color: rgba(245, 241, 232, 0.6);
+    padding: 48px 56px;
+    border-top: 0.5px solid rgba(201, 169, 97, 0.15);
+  }
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .footer-links a {
+    color: rgba(245, 241, 232, 0.55);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* Mobile */
+  @media (max-width: 820px) {
+    nav, nav.scrolled { padding: 16px 24px; }
+    .hero { padding: 140px 24px 80px; }
+    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .hero-photo { max-width: 320px; }
+    section { padding: 80px 24px; }
+    .credibility { padding: 56px 24px; }
+    .credibility-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 16px;
+    }
+    .pillars { grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+    .pathway-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-photo { max-width: 240px; margin: 0 auto; }
+    .assessment { padding: 80px 24px; }
+    .form-card { padding: 32px 24px; }
+    .audience-options { grid-template-columns: 1fr; }
+    .commitment-scale { grid-template-columns: repeat(5, 1fr); }
+    .footer-grid { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">CODE 1</div>
+  <a href="#assessment" class="nav-cta">Begin Assessment</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="rule reveal"></div>
+      <h1 class="reveal reveal-delay-1">Your potential is always the highest priority.</h1>
+      <p class="hero-sub reveal reveal-delay-2">Leadership development, business transformation, and human potential — for leaders, organisations, and governments across Africa and beyond.</p>
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#assessment" class="btn-primary">Begin your assessment</a>
+        <a href="#about" class="btn-secondary">Read Danston's story</a>
+      </div>
+    </div>
+    <div class="hero-photo reveal reveal-delay-2">
+      Hero photograph<br>of Danston<br><br>(warm · powerful · real)
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="container-narrow">
+    <div class="rule reveal"></div>
+    <h2 class="reveal reveal-delay-1">Most leaders are working incredibly hard — in the wrong direction.</h2>
+    <p class="reveal reveal-delay-2">Effort isn't the issue. Direction is. Before you can build something that lasts, you need clarity on who's doing the building. That's where Code 1 begins.</p>
+  </div>
+</section>
+
+<section class="credibility">
+  <div class="credibility-grid">
+    <div class="reveal">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Years experience</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Continents</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Governments advised</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div class="stat-num">$M+</div>
+      <div class="stat-label">Businesses built</div>
+    </div>
+    <div class="reveal reveal-delay-4">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Books published</div>
+    </div>
+  </div>
+</section>
+
+<section class="system">
+  <div class="container">
+    <div class="system-header">
+      <div class="rule rule-center reveal"></div>
+      <h2 class="reveal reveal-delay-1">First — who you are.<br>Then — what you build.</h2>
+      <p class="reveal reveal-delay-2">Code 1 is a complete leadership and organisational transformation system, combining the I Philosophy and the 5D Framework with AI-integrated forensic diagnostic technology — bespoke to you.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-mark">I</div>
+        <h3>The I Philosophy</h3>
+        <div class="pillar-list">Presence<br>Communication<br>Leadership</div>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <div class="pillar-mark">5D</div>
+        <h3>The 5D Framework</h3>
+        <div class="pillar-list">Discover · Diagnose<br>Discuss · Design<br>Deliver</div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal">
+      <p>"I don't fight the fires. I bring in wet logs. As the strengths grow, the weaknesses resolve themselves."</p>
+    </div>
+  </div>
+</section>
+
+<section class="pathways">
+  <div class="container-narrow">
+    <div class="pathways-header">
+      <div class="rule rule-center reveal"></div>
+      <h2 class="reveal reveal-delay-1">Who do you need to become?</h2>
+    </div>
+    <div class="pathway-grid">
+      <a href="#assessment" class="pathway-card reveal" data-audience="individual">
+        <h3>I am an Individual</h3>
+        <p>Self-discovery, personal brand, identity</p>
+      </a>
+      <a href="#assessment" class="pathway-card reveal reveal-delay-1" data-audience="sales">
+        <h3>I lead a Sales Team</h3>
+        <p>Sell from identity and purpose, not pressure and scripts</p>
+      </a>
+      <a href="#assessment" class="pathway-card reveal reveal-delay-2" data-audience="organisation">
+        <h3>I run an Organisation</h3>
+        <p>Bespoke leadership and business development programmes</p>
+      </a>
+      <a href="#assessment" class="pathway-card reveal reveal-delay-3" data-audience="government">
+        <h3>I represent a Government</h3>
+        <p>Large-scale human capital development</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      Photograph of Danston<br><br>(on stage or<br>in conversation)
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <div class="rule"></div>
+      <h2>My name means the restorer.</h2>
+      <p>I'm a British-African business builder, leadership coach, sales strategist, and author with over 30 years of experience across four continents. I've built multimillion-dollar businesses, served as Vice President in three major organisations, advised three governments, and written two books.</p>
+      <p>My surname — Mugarura — means the restorer in my mother tongue. Everything I do is the proof of it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="assessment" id="assessment">
+  <div class="assessment-header reveal">
+    <div class="rule rule-center"></div>
+    <h2>Is Code 1 right for you?</h2>
+    <p>Ten questions. Under ten minutes. Free. Reviewed personally by Danston or the Code 1 team within 48 hours.</p>
+  </div>
+
+  <div class="form-card reveal reveal-delay-1">
+
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <div class="form-step active" data-step="1">
+      <div class="step-counter">Question 1 of 10</div>
+      <div class="step-question">Who are you?</div>
+      <div class="audience-options">
+        <button class="audience-option" data-value="Individual">Individual</button>
+        <button class="audience-option" data-value="Sales Professional">Sales professional</button>
+        <button class="audience-option" data-value="Organisation">Organisation</button>
+        <button class="audience-option" data-value="Government">Government</button>
+      </div>
+      <div class="form-nav">
+        <button class="btn-next" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="2">
+      <div class="step-counter">Question 2 of 10</div>
+      <div class="step-question">What is your single biggest challenge right now?</div>
+      <textarea class="form-textarea" placeholder="In your own words..."></textarea>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="3">
+      <div class="step-counter">Question 3 of 10</div>
+      <div class="step-question">How long has this been a challenge?</div>
+      <input type="text" class="form-input" placeholder="Months, years...">
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="4">
+      <div class="step-counter">Question 4 of 10</div>
+      <div class="step-question">What have you already tried?</div>
+      <textarea class="form-textarea" placeholder="Programmes, coaches, books, courses..."></textarea>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="5">
+      <div class="step-counter">Question 5 of 10</div>
+      <div class="step-question">What does success look like for you in 12 months?</div>
+      <textarea class="form-textarea" placeholder="Be as specific as you can..."></textarea>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="6">
+      <div class="step-counter">Question 6 of 10</div>
+      <div class="step-question">What is the cost of this challenge continuing?</div>
+      <textarea class="form-textarea" placeholder="Financial, personal, organisational..."></textarea>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="7">
+      <div class="step-counter">Question 7 of 10</div>
+      <div class="step-question">How committed are you to addressing this now?</div>
+      <div class="commitment-scale">
+        <button class="scale-num" data-value="1">1</button>
+        <button class="scale-num" data-value="2">2</button>
+        <button class="scale-num" data-value="3">3</button>
+        <button class="scale-num" data-value="4">4</button>
+        <button class="scale-num" data-value="5">5</button>
+        <button class="scale-num" data-value="6">6</button>
+        <button class="scale-num" data-value="7">7</button>
+        <button class="scale-num" data-value="8">8</button>
+        <button class="scale-num" data-value="9">9</button>
+        <button class="scale-num" data-value="10">10</button>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="8">
+      <div class="step-counter">Question 8 of 10</div>
+      <div class="step-question">How do you prefer to work?</div>
+      <div class="audience-options">
+        <button class="audience-option" data-value="Remote">Remote</button>
+        <button class="audience-option" data-value="On-site">On-site</button>
+        <button class="audience-option" data-value="Both">Both</button>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="9">
+      <div class="step-counter">Question 9 of 10</div>
+      <div class="step-question">How did you find Code 1?</div>
+      <input type="text" class="form-input" placeholder="Referral, search, social, event...">
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next">Continue →</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="10">
+      <div class="step-counter">Question 10 of 10</div>
+      <div class="step-question">What would you like to happen next?</div>
+      <textarea class="form-textarea" placeholder="A conversation, a proposal, more information..."></textarea>
+      <input type="email" class="form-input" placeholder="Your email address" style="margin-top: 4px;">
+      <div class="form-nav">
+        <button class="btn-back">← Back</button>
+        <button class="btn-next" id="submit-btn">Submit assessment</button>
+      </div>
+    </div>
+
+    <div class="form-step" data-step="11">
+      <div class="form-success">
+        <h3>Thank you.</h3>
+        <p>Your assessment has been received. Danston or a member of the Code 1 team will respond personally within 48 hours.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="privacy-note">Private and confidential.</p>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-tag">Because your potential is always the highest priority.</div>
+    <div class="footer-links">
+      <a href="mailto:hello@code1.com">Email</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered reveal animations
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -60px 0px'
+  });
+  revealElements.forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Pathway cards pre-select audience in form
+  document.querySelectorAll('.pathway-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const audience = card.dataset.audience;
+      const map = {
+        'individual': 'Individual',
+        'sales': 'Sales Professional',
+        'organisation': 'Organisation',
+        'government': 'Government'
+      };
+      setTimeout(() => {
+        const target = document.querySelector(`.audience-option[data-value="${map[audience]}"]`);
+        if (target) {
+          document.querySelectorAll('[data-step="1"] .audience-option').forEach(o => o.classList.remove('selected'));
+          target.classList.add('selected');
+          const nextBtn = document.querySelector('[data-step="1"] .btn-next');
+          nextBtn.disabled = false;
+        }
+      }, 600);
+    });
+  });
+
+  // Multi-step form
+  const steps = document.querySelectorAll('.form-step');
+  const totalSteps = 10;
+  let currentStep = 1;
+
+  // Build progress bar
+  const progressBar = document.getElementById('progress-bar');
+  for (let i = 0; i < totalSteps; i++) {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment';
+    progressBar.appendChild(seg);
+  }
+  updateProgress();
+
+  function updateProgress() {
+    document.querySelectorAll('.progress-segment').forEach((seg, i) => {
+      if (i < currentStep) seg.classList.add('complete');
+      else seg.classList.remove('complete');
+    });
+  }
+
+  function goToStep(stepNum) {
+    steps.forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`[data-step="${stepNum}"]`);
+    if (target) {
+      target.classList.add('active');
+      currentStep = stepNum;
+      if (stepNum <= totalSteps) updateProgress();
+      else {
+        document.querySelectorAll('.progress-segment').forEach(s => s.classList.add('complete'));
+      }
+    }
+  }
+
+  // Audience option selection (steps 1 and 8)
+  document.querySelectorAll('.audience-options').forEach(group => {
+    group.querySelectorAll('.audience-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('.audience-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        const step = opt.closest('.form-step');
+        const nextBtn = step.querySelector('.btn-next');
+        if (nextBtn) nextBtn.disabled = false;
+      });
+    });
+  });
+
+  // Commitment scale (step 7)
+  document.querySelectorAll('.scale-num').forEach(num => {
+    num.addEventListener('click', () => {
+      document.querySelectorAll('.scale-num').forEach(n => n.classList.remove('selected'));
+      num.classList.add('selected');
+      const step = num.closest('.form-step');
+      step.querySelector('.btn-next').disabled = false;
+    });
+  });
+
+  // Next buttons
+  document.querySelectorAll('.btn-next').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      if (btn.id === 'submit-btn') {
+        goToStep(11);
+      } else {
+        goToStep(currentStep + 1);
+      }
+    });
+  });
+
+  // Back buttons
+  document.querySelectorAll('.btn-back').forEach(btn => {
+    btn.addEventListener('click', () => {
+      goToStep(currentStep - 1);
+    });
+  });
+</script>
+
+</body>
+</html>
